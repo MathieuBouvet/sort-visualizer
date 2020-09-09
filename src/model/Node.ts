@@ -10,4 +10,14 @@ export class Node<T> {
     this.left = null;
     this.right = null;
   }
+
+  *dfs(): Generator<Node<T>, void> {
+    yield this;
+    if (this.left !== null) {
+      yield* this.left.dfs();
+    }
+    if (this.right !== null) {
+      yield* this.right.dfs();
+    }
+  }
 }

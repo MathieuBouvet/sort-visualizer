@@ -55,10 +55,10 @@ test("Depth first search", () => {
   const depthArray = [...root.dfs()];
 
   expect(depthArray).toEqual([
-    { left: node1, right: node2, data: { name: "root" } },
-    { left: null, right: null, data: { name: "node 1" } },
-    { left: null, right: node3, data: { name: "node 2" } },
-    { left: null, right: null, data: { name: "node 3" } },
+    [{ left: node1, right: node2, data: { name: "root" } }, []],
+    [{ left: null, right: null, data: { name: "node 1" } }, ["L"]],
+    [{ left: null, right: node3, data: { name: "node 2" } }, ["R"]],
+    [{ left: null, right: null, data: { name: "node 3" } }, ["R", "R"]],
   ]);
 });
 

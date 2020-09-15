@@ -16,13 +16,14 @@ export class Node<T> {
     return selectedChild ?? undefined;
   }
 
-  *dfs(): Generator<Node<T>, void> {
-    yield this;
+  *dfs(_path?: TreePath): Generator<[Node<T>, TreePath], void> {
+    const path = _path ?? [];
+    yield [this, path];
     if (this.left !== null) {
-      yield* this.left.dfs();
+      yield* this.left.dfs([...path, "L"]);
     }
     if (this.right !== null) {
-      yield* this.right.dfs();
+      yield* this.right.dfs([...path, "R"]);
     }
   }
 

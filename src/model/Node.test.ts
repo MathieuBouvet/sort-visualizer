@@ -73,3 +73,8 @@ test.each<[string, ("L" | "R")[], string]>([
   const searchedNode = testTree.find(path);
   expect(searchedNode?.data?.name).toBe(expectedNodeName);
 });
+
+test("find a non-existing path", () => {
+  const testTree = getTestTree();
+  expect(testTree.find(["R", "R", "R"])).toBeUndefined();
+});

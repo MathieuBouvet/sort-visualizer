@@ -63,18 +63,18 @@ test("Depth first search", () => {
 });
 
 test.each<[string, ("L" | "R")[], string]>([
-  ["find a node from a path", ["L", "L"], "node4"],
-  ["find a node from a path", ["R", "L"], "node5"],
-  ["find a node from a path", ["R"], "node2"],
-  ["find a node from a path", ["L", "L", "R"], "node6"],
-  ["find the root", [], "root"],
+  ["get a node from a path", ["L", "L"], "node4"],
+  ["get a node from a path", ["R", "L"], "node5"],
+  ["get a node from a path", ["R"], "node2"],
+  ["get a node from a path", ["L", "L", "R"], "node6"],
+  ["get the root", [], "root"],
 ])("%s", (_, path, expectedNodeName) => {
   const testTree = getTestTree();
-  const searchedNode = testTree.find(path);
+  const searchedNode = testTree.get(path);
   expect(searchedNode?.data?.name).toBe(expectedNodeName);
 });
 
 test("find a non-existing path", () => {
   const testTree = getTestTree();
-  expect(testTree.find(["R", "R", "R"])).toBeUndefined();
+  expect(testTree.get(["R", "R", "R"])).toBeUndefined();
 });

@@ -30,12 +30,12 @@ export class Node<T> {
     yield* this.dfsWithPath([]);
   }
 
-  find(path: TreePath): Node<T> | undefined {
+  get(path: TreePath): Node<T> | undefined {
     if (path.length === 0) {
       return this;
     }
     const [childPath, ...subPath] = path;
     const currentChild = this.selectChild(childPath);
-    return currentChild?.find(subPath);
+    return currentChild?.get(subPath);
   }
 }

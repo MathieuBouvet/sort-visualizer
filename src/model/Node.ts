@@ -35,9 +35,6 @@ export class Node<T> {
     }
     const [childPath, ...subPath] = path;
     const currentChild = this.selectChild(childPath);
-    if (path.length === 1) {
-      return currentChild;
-    }
     return currentChild?.find(subPath);
   }
 }

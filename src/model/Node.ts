@@ -13,10 +13,7 @@ export class Node<T> {
 
   private selectChild(path: "L" | "R"): Node<T> | undefined {
     const selectedChid = path === "L" ? this.left : this.right;
-    if (selectedChid === null) {
-      return undefined;
-    }
-    return selectedChid;
+    return selectedChid ?? undefined;
   }
 
   *dfs(): Generator<Node<T>, void> {

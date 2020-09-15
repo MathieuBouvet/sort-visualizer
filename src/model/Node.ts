@@ -30,6 +30,9 @@ export class Node<T> {
   }
 
   find(path: TreePath): Node<T> | undefined {
+    if (path.length === 0) {
+      return this;
+    }
     const [childPath, ...subPath] = path;
     const currentChild = this.selectChild(childPath);
     if (path.length === 1) {

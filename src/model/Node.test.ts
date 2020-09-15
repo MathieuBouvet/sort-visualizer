@@ -62,7 +62,11 @@ test("Depth first search", () => {
   ]);
 });
 
-test("find a node from a path", () => {
+test.each<[string, ("L" | "R")[], string]>([
+  ["find a node from a path", ["L", "L"], "node4"],
+  ["find the root", [], "root"],
+])("%s", (_, path, expectedNodeName) => {
   const testTree = getTestTree();
-  expect(testTree.find(["L", "L"]).data?.name).toBe("node4");
+  const searchedNode = testTree.find(path);
+  expect(searchedNode?.data?.name).toBe(expectedNodeName);
 });

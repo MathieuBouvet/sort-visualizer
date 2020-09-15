@@ -1,3 +1,5 @@
+type TreePath = ("L" | "R")[];
+
 export class Node<T> {
   data: T | null;
   left: Node<T> | null;
@@ -17,5 +19,9 @@ export class Node<T> {
     if (this.right !== null) {
       yield* this.right.dfs();
     }
+  }
+
+  find(path: TreePath): Node<T> {
+    return this;
   }
 }

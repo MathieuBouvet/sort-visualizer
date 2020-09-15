@@ -61,3 +61,8 @@ test("Depth first search", () => {
     { left: null, right: null, data: { name: "node 3" } },
   ]);
 });
+
+test("find a node from a path", () => {
+  const testTree = getTestTree();
+  expect(testTree.find(["L", "L"]).data?.name).toBe("node4");
+});

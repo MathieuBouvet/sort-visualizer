@@ -2,12 +2,12 @@ import { Node } from "./Node";
 
 function getTestTree(): Node<{ name: string }> {
   const root = new Node({ name: "root" });
-  const node1 = new Node({ name: "node 1" });
-  const node2 = new Node({ name: "node 2" });
-  const node3 = new Node({ name: "node 3" });
-  const node4 = new Node({ name: "node 4" });
-  const node5 = new Node({ name: "node 5" });
-  const node6 = new Node({ name: "node 6" });
+  const node1 = new Node({ name: "node1" });
+  const node2 = new Node({ name: "node2" });
+  const node3 = new Node({ name: "node3" });
+  const node4 = new Node({ name: "node4" });
+  const node5 = new Node({ name: "node5" });
+  const node6 = new Node({ name: "node6" });
 
   root.left = node1;
   root.right = node2;

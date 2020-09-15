@@ -1,5 +1,31 @@
 import { Node } from "./Node";
 
+function getTestTree(): Node<{ name: string }> {
+  const root = new Node({ name: "root" });
+  const node1 = new Node({ name: "node 1" });
+  const node2 = new Node({ name: "node 2" });
+  const node3 = new Node({ name: "node 3" });
+  const node4 = new Node({ name: "node 4" });
+  const node5 = new Node({ name: "node 5" });
+  const node6 = new Node({ name: "node 6" });
+
+  root.left = node1;
+  root.right = node2;
+  node1.left = node4;
+  node2.left = node5;
+  node2.right = node3;
+  node4.right = node6;
+
+  return root;
+  /*
+                        root
+              node1              node2
+        node4               node5     node3
+            node6
+
+  */
+}
+
 test("Node instantiation", () => {
   let node = new Node();
   expect(node).toEqual({

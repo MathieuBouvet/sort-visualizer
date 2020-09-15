@@ -11,6 +11,14 @@ export class Node<T> {
     this.right = null;
   }
 
+  private selectChild(path: "L" | "R"): Node<T> | undefined {
+    const selectedChid = path === "L" ? this.left : this.right;
+    if (selectedChid === null) {
+      return undefined;
+    }
+    return selectedChid;
+  }
+
   *dfs(): Generator<Node<T>, void> {
     yield this;
     if (this.left !== null) {
@@ -21,7 +29,12 @@ export class Node<T> {
     }
   }
 
-  find(path: TreePath): Node<T> {
-    return this;
+  find(path: TreePath): Node<T> | undefined {
+    const [childPath, ...subPath] = path;
+    const currentChild = this.selectChild(childPath);
+    if (path.length === 1) {
+      return currentChild;
+    }
+    return currentChild?.find(subPath);
   }
 }

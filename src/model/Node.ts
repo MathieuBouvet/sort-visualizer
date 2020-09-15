@@ -16,15 +16,18 @@ export class Node<T> {
     return selectedChild ?? undefined;
   }
 
-  *dfs(_path?: TreePath): Generator<[Node<T>, TreePath], void> {
-    const path = _path ?? [];
+  private *dfsWithPath(path: TreePath): Generator<[Node<T>, TreePath], void> {
     yield [this, path];
     if (this.left !== null) {
-      yield* this.left.dfs([...path, "L"]);
+      yield* this.left.dfsWithPath([...path, "L"]);
     }
     if (this.right !== null) {
-      yield* this.right.dfs([...path, "R"]);
+      yield* this.right.dfsWithPath([...path, "R"]);
     }
+  }
+
+  *dfs(): Generator<[Node<T>, TreePath], void> {
+    yield* this.dfsWithPath([]);
   }
 
   find(path: TreePath): Node<T> | undefined {

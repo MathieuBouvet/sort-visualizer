@@ -64,6 +64,9 @@ test("Depth first search", () => {
 
 test.each<[string, ("L" | "R")[], string]>([
   ["find a node from a path", ["L", "L"], "node4"],
+  ["find a node from a path", ["R", "L"], "node5"],
+  ["find a node from a path", ["R"], "node2"],
+  ["find a node from a path", ["L", "L", "R"], "node6"],
   ["find the root", [], "root"],
 ])("%s", (_, path, expectedNodeName) => {
   const testTree = getTestTree();

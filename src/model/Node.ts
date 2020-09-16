@@ -41,7 +41,11 @@ export class Node<T> {
 }
 
 function createTree<T>(depth: number, initWith?: T): Node<T> {
-  const newNode = new Node(initWith);
+  const initData =
+    typeof initWith === "object" && initWith != null
+      ? { ...initWith }
+      : initWith;
+  const newNode = new Node(initData);
   if (depth > 0) {
     newNode.left = createTree(depth - 1, initWith);
     newNode.right = createTree(depth - 1, initWith);

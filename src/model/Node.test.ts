@@ -116,3 +116,28 @@ test.each([
   const dfsArray = Array.from(tree.dfs(), ([node]) => node.data);
   expect(dfsArray).toEqual(expected);
 });
+
+test("tree creation with an object as init value, must shallo copy this object", () => {
+  const tree = createTree(3, { test: 42 });
+  if (tree != null && tree.data != null) {
+    tree.data.test = 21;
+  }
+  const treeData = Array.from(tree.dfs(), ([node]) => node.data?.test);
+  expect(treeData).toEqual([
+    21,
+    42,
+    42,
+    42,
+    42,
+    42,
+    42,
+    42,
+    42,
+    42,
+    42,
+    42,
+    42,
+    42,
+    42,
+  ]);
+});

@@ -39,3 +39,14 @@ export class Node<T> {
     return currentChild?.get(subPath);
   }
 }
+
+function createTree<T>(depth: number, initWith?: T): Node<T> {
+  const newNode = new Node(initWith);
+  if (depth > 0) {
+    newNode.left = createTree(depth - 1, initWith);
+    newNode.right = createTree(depth - 1, initWith);
+  }
+  return newNode;
+}
+
+export { createTree };

@@ -1,4 +1,4 @@
-import { Node } from "./Node";
+import { Node, createTree } from "./Node";
 
 function getTestTree(): Node<{ name: string }> {
   const root = new Node({ name: "root" });
@@ -77,4 +77,42 @@ test.each<[string, ("L" | "R")[], string]>([
 test("find a non-existing path", () => {
   const testTree = getTestTree();
   expect(testTree.get(["R", "R", "R"])).toBeUndefined();
+});
+
+test.each([
+  [
+    "a tree of depth 2 initialized with 42",
+    2,
+    42,
+    [42, 42, 42, 42, 42, 42, 42],
+  ],
+  ["a tree of depth 0 initialized with 42", 0, 42, [42]],
+  ["a tree of depth 1 initialized with 42", 1, 42, [42, 42, 42]],
+  ["a tree with a depth less than 0", -54, 42, [42]],
+  [
+    "a tree of depth 3 not initialized",
+    3,
+    null,
+    [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+    ],
+  ],
+])("creation of %s", (_, depth, initWith, expected) => {
+  const tree = createTree(depth, initWith);
+  const dfsArray = Array.from(tree.dfs(), ([node]) => node.data);
+  expect(dfsArray).toEqual(expected);
 });

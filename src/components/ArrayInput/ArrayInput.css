@@ -1,0 +1,8 @@
+.ArrayInput {
+  display: flex;
+  font-size: 2em;
+}
+
+.ArrayInput .array-item {
+  border: 2px solid var(--theme-color);
+}

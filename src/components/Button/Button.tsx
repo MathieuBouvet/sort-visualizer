@@ -5,10 +5,16 @@ import "./Button.css";
 type ButtonProps = {
   Icon?: IconType;
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  className?: string;
 };
 
-const Button: React.FC<ButtonProps> = ({ children, onClick, Icon }) => (
-  <button className="Button" onClick={onClick}>
+const Button: React.FC<ButtonProps> = ({
+  children,
+  onClick,
+  Icon,
+  className,
+}) => (
+  <button className={`Button ${className ?? ""}`} onClick={onClick}>
     <div className="button-content">
       {Icon && <Icon className="button-icon" />}
       {children}

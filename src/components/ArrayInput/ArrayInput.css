@@ -27,3 +27,7 @@
 .ArrayInput .item-input:focus {
   outline: none;
 }
+
+.ArrayInput .add-number-button {
+  margin: 5px;
+}

@@ -1,10 +1,29 @@
 .ArrayInput {
+  --item-min-width: 44px;
   display: flex;
   font-size: 2.2em;
 }
 
 .ArrayInput .array-item {
   border: 2px solid var(--theme-color);
-  min-width: 44px;
+  min-width: var(--item-min-width);
   text-align: center;
+  background-color: lightsalmon;
+}
+
+.ArrayInput .item-input-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.ArrayInput .item-input {
+  min-width: var(--item-min-width);
+  border: none;
+  height: 100%;
+  margin: 0;
+  text-align: center;
+}
+
+.ArrayInput .item-input:focus {
+  outline: none;
 }

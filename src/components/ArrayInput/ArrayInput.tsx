@@ -13,6 +13,9 @@ const ArrayInput = <T,>({ currentList }: ArrayInputProps<T>) => (
         {item}
       </div>
     ))}
+    <div className="array-item item-input-wrapper">
+      <input className="item-input" type="text" placeholder="nombre" size={1} />
+    </div>
   </div>
 );
 

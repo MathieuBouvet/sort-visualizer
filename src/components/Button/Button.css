@@ -1,0 +1,35 @@
+.Button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.375rem 0.75rem;
+  font-weight: 400;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.Button:hover {
+  background-color: #0069d9;
+}
+
+.Button:active {
+  background-color: #0062cc;
+}
+
+.Button:focus {
+  outline: none;
+}
+
+.Button .button-content {
+  display: flex;
+  align-items: center;
+}
+
+.Button:active .button-content {
+  transform: translateY(2px);
+}
+
+.Button .button-icon {
+  margin-right: 7px;
+}

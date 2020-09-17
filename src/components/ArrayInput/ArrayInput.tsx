@@ -2,13 +2,13 @@ import React from "react";
 import "./ArrayInput.css";
 
 type ArrayInputProps<T> = {
-  displayArray: T[];
-  insert: () => void;
+  currentList: T[];
+  onInsert: () => void;
 };
 
-const ArrayInput = <T,>({ displayArray }: ArrayInputProps<T>) => (
+const ArrayInput = <T,>({ currentList }: ArrayInputProps<T>) => (
   <div className="ArrayInput">
-    {displayArray.map((item, index) => (
+    {currentList.map((item, index) => (
       <div key={index} className="array-item">
         {item}
       </div>

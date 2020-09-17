@@ -18,7 +18,7 @@ function arrayInputReducer(
 ): ArrayInputState {
   switch (action.type) {
     case "EDIT": {
-      return state;
+      return { ...state, inputValue: parseInt(action.value, 10) };
     }
     default: {
       return state;

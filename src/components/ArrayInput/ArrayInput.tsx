@@ -31,6 +31,7 @@ const ArrayInput = <T extends { toString: () => string }>({
               className="array-item"
               value={item.toString()}
               onChange={(e) => onEdit(e.target.value)}
+              onBlur={onEditEnd}
             />
           );
         } else {

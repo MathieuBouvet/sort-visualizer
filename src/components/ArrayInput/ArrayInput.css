@@ -1,7 +1,6 @@
 .ArrayInput {
   --item-min-width: 44px;
   display: flex;
-  font-size: 2rem;
 }
 
 .ArrayInput .array-item {
@@ -9,6 +8,15 @@
   min-width: var(--item-min-width);
   text-align: center;
   background-color: lightsalmon;
+  font-size: 2rem;
+}
+
+.ArrayInput .array-item.array-item-edition:focus {
+  outline: none;
+}
+
+.ArrayInput .array-item.array-item-edition {
+  cursor: pointer;
 }
 
 .ArrayInput .item-input-wrapper {

@@ -5,18 +5,46 @@ import Button from "../Button";
 
 type ArrayInputProps<T> = {
   currentList: T[];
-  onInsert: () => void;
+  editingIndex?: number;
+  onInsert?: () => void;
+  onEditStart?: (editingIndex: number) => void;
+  onEditEnd?: () => void;
+  onEdit?: (newValue: string) => void;
 };
 
-const ArrayInput = <T,>({ currentList, onInsert }: ArrayInputProps<T>) => {
+const ArrayInput = <T extends { toString: () => string }>({
+  currentList,
+  editingIndex = -1,
+  onInsert = () => null,
+  onEditStart = () => null,
+  onEdit = () => null,
+  onEditEnd = () => null,
+}: ArrayInputProps<T>) => {
   const [state, dispatch] = useArrayInputState();
   return (
     <div className="ArrayInput">
-      {currentList.map((item, index) => (
-        <div key={index} className="array-item">
-          {item}
-        </div>
-      ))}
+      {currentList.map((item, index) => {
+        if (index === editingIndex) {
+          return (
+            <input
+              key={`display-${index}`}
+              className="array-item"
+              value={item.toString()}
+              onChange={(e) => onEdit(e.target.value)}
+            />
+          );
+        } else {
+          return (
+            <button
+              key={`edit-${index}`}
+              className="array-item array-item-edition"
+              onClick={() => onEditStart(index)}
+            >
+              {item}
+            </button>
+          );
+        }
+      })}
       <div className="array-item item-input-wrapper">
         <input
           className="item-input"

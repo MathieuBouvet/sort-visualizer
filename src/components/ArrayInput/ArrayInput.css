@@ -1,7 +1,7 @@
 .ArrayInput {
   --item-min-width: 44px;
   display: flex;
-  font-size: 2.2em;
+  font-size: 2rem;
 }
 
 .ArrayInput .array-item {

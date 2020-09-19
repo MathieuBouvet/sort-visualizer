@@ -11,12 +11,21 @@
   font-size: 2rem;
 }
 
-.ArrayInput .array-item.array-item-edition:focus {
+.ArrayInput .array-item.array-item-display:focus {
   outline: none;
 }
 
-.ArrayInput .array-item.array-item-edition {
+.ArrayInput .array-item.array-item-display {
   cursor: pointer;
+}
+
+.ArrayInput .array-item.array-item-edition {
+  background-color: white;
+  font-size: 1.5rem;
+}
+
+.ArrayInput .array-item.array-item-edition:focus {
+  outline: none;
 }
 
 .ArrayInput .item-input-wrapper {

@@ -28,17 +28,18 @@ const ArrayInput = <T extends { toString: () => string }>({
           return (
             <input
               key={`display-${index}`}
-              className="array-item"
+              className="array-item array-item-edition"
               value={item.toString()}
               onChange={(e) => onEdit(e.target.value)}
               onBlur={onEditEnd}
+              size={item.toString().length || 1}
             />
           );
         } else {
           return (
             <button
               key={`edit-${index}`}
-              className="array-item array-item-edition"
+              className="array-item array-item-display"
               onClick={() => onEditStart(index)}
             >
               {item}

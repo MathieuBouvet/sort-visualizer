@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import "./ArrayInput.css";
 import useArrayInputState from "./useArrayInputState";
 import Button from "../Button";
@@ -21,12 +21,17 @@ const ArrayInput = <T extends { toString: () => string }>({
   onEditEnd = () => null,
 }: ArrayInputProps<T>) => {
   const [state, dispatch] = useArrayInputState();
+  const inputRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    inputRef.current?.select();
+  }, [editingIndex]);
   return (
     <div className="ArrayInput">
       {currentList.map((item, index) => {
         if (index === editingIndex) {
           return (
             <input
+              ref={inputRef}
               key={`display-${index}`}
               className="array-item array-item-edition"
               value={item.toString()}

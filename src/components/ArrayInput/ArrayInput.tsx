@@ -37,6 +37,7 @@ const ArrayInput = <T extends { toString: () => string }>({
               value={item.toString()}
               onChange={(e) => onEdit(e.target.value)}
               onBlur={onEditEnd}
+              onKeyDown={(e) => e.key === "Enter" && onEditEnd()}
               size={item.toString().length || 1}
             />
           );

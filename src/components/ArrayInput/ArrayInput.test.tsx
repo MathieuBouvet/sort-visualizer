@@ -56,5 +56,8 @@ test("edit mode stop", () => {
   );
   const testInput = getByDisplayValue("21");
   fireEvent.blur(testInput);
-  expect(testEditEndHandler).toHaveBeenCalled();
+  expect(testEditEndHandler).toHaveBeenCalledTimes(1);
+
+  fireEvent.keyDown(testInput, { key: "Enter" });
+  expect(testEditEndHandler).toHaveBeenCalledTimes(2);
 });

@@ -1,4 +1,5 @@
 import { useReducer } from "react";
+import validateListItem from "../../utils/validateListItem";
 
 export type MergeSortState = {
   numberList: (number | "" | "-")[];
@@ -33,27 +34,6 @@ type EditListItem = {
 
 export type MergeSortAction = InsertValue | StartEdition | EditListItem;
 
-function validateEditValue(
-  value: string
-): { isValid: boolean; value: number | "" | "-" } {
-  const parsed = parseInt(value);
-  if (value === "" || value === "-") {
-    return {
-      isValid: true,
-      value,
-    };
-  } else if (!isNaN(parsed)) {
-    return {
-      isValid: true,
-      value: parsed,
-    };
-  }
-  return {
-    isValid: false,
-    value: "",
-  };
-}
-
 export function mergeSortReducer(
   state: MergeSortState,
   action: MergeSortAction
@@ -77,7 +57,7 @@ export function mergeSortReducer(
     }
     case "EDIT_LIST_ITEM": {
       const { editingIndex, numberList } = state;
-      const { isValid, value: newValue } = validateEditValue(
+      const { isValid, value: newValue } = validateListItem(
         action.payload.value
       );
       if (!isValid) {

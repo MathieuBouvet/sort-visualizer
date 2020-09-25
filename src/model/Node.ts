@@ -38,6 +38,15 @@ export class Node<T> {
     const currentChild = this.selectChild(childPath);
     return currentChild?.get(subPath);
   }
+
+  getDepth(): number {
+    if (this.left == null && this.right == null) {
+      return 0;
+    }
+    const leftDepth = this.left?.getDepth() ?? 0;
+    const rightDepth = this.right?.getDepth() ?? 0;
+    return Math.max(leftDepth, rightDepth) + 1;
+  }
 }
 
 function createTree<T>(depth: number, initWith?: T): Node<T> {

@@ -141,3 +141,13 @@ test("tree creation with an object as init value, must shallo copy this object",
     42,
   ]);
 });
+
+test("get depth of a one node tree", () => {
+  const node = new Node(42);
+  expect(node.getDepth()).toBe(0);
+});
+
+test("get depth of tree", () => {
+  const tree = getTestTree();
+  expect(tree.getDepth()).toBe(3);
+});

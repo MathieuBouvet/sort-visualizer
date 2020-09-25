@@ -1,7 +1,8 @@
 import { useReducer } from "react";
+import validateListItem from "../../utils/validateListItem";
 
 type ArrayInputState = {
-  inputValue: number | null;
+  inputValue: number | "" | "-";
   hasError: boolean;
 };
 
@@ -18,7 +19,11 @@ function arrayInputReducer(
 ): ArrayInputState {
   switch (action.type) {
     case "EDIT": {
-      return { ...state, inputValue: parseInt(action.value, 10) };
+      const { isValid, value } = validateListItem(action.value);
+      if (!isValid) {
+        return state;
+      }
+      return { ...state, inputValue: value };
     }
     default: {
       return state;
@@ -29,6 +34,6 @@ function arrayInputReducer(
 export default function useArrayInputState() {
   return useReducer<typeof arrayInputReducer>(arrayInputReducer, {
     hasError: false,
-    inputValue: null,
+    inputValue: "",
   });
 }

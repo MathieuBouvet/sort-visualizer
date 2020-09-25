@@ -22,6 +22,46 @@ test("updating the item value ", () => {
   expect(testInsertHandler).toHaveBeenCalledWith(42);
 });
 
+test("updating the item value with an empty string", () => {
+  const testInsertHandler = jest.fn();
+  const { getByRole, getByDisplayValue } = render(
+    <ArrayInput currentList={[]} onInsert={testInsertHandler} />
+  );
+  const itemInput = getByRole("textbox");
+  fireEvent.change(itemInput, { target: { value: "4" } });
+  fireEvent.change(itemInput, { target: { value: "" } });
+  expect(getByDisplayValue("")).toBeInTheDocument();
+  const insertButton = getByRole("button", { name: "Add" });
+  insertButton.click();
+  expect(testInsertHandler).not.toHaveBeenCalled();
+});
+
+test("updating the item value with a dash", () => {
+  const testInsertHandler = jest.fn();
+  const { getByRole, getByDisplayValue } = render(
+    <ArrayInput currentList={[]} onInsert={testInsertHandler} />
+  );
+  const itemInput = getByRole("textbox");
+  fireEvent.change(itemInput, { target: { value: "-" } });
+  expect(getByDisplayValue("-")).toBeInTheDocument();
+  const insertButton = getByRole("button", { name: "Add" });
+  insertButton.click();
+  expect(testInsertHandler).not.toHaveBeenCalled();
+});
+
+test("updating the item value with a negative integer", () => {
+  const testInsertHandler = jest.fn();
+  const { getByRole, getByDisplayValue } = render(
+    <ArrayInput currentList={[]} onInsert={testInsertHandler} />
+  );
+  const itemInput = getByRole("textbox");
+  fireEvent.change(itemInput, { target: { value: "-42" } });
+  expect(getByDisplayValue("-42")).toBeInTheDocument();
+  const insertButton = getByRole("button", { name: "Add" });
+  insertButton.click();
+  expect(testInsertHandler).toHaveBeenCalledWith(-42);
+});
+
 test("edit mode", () => {
   const testEditHandler = jest.fn();
   const { getByDisplayValue } = render(

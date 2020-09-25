@@ -57,9 +57,7 @@ const ArrayInput = <T extends { toString: () => string }>({
         <input
           className="item-input"
           type="text"
-          size={
-            state.inputValue !== null ? state.inputValue.toString().length : 1
-          }
+          size={state.inputValue.toString().length || 1}
           value={state.inputValue ?? ""}
           onChange={(e) => dispatch({ type: "EDIT", value: e.target.value })}
         />
@@ -67,7 +65,7 @@ const ArrayInput = <T extends { toString: () => string }>({
       <Button
         className="add-number-button"
         onClick={() => {
-          if (state.inputValue) {
+          if (typeof state.inputValue === "number") {
             onInsert(state.inputValue);
           }
         }}

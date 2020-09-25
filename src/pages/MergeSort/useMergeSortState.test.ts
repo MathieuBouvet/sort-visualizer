@@ -5,7 +5,7 @@ import {
   mergeSortInitialState as initialState,
 } from "./useMergeSortState";
 
-test.each<[string, MergeSortState, MergeSortAction, MergeSortState]>([
+test.each<[string, MergeSortState, MergeSortAction, MergeSortState, boolean?]>([
   [
     "inserting a value in the number list",
     initialState,
@@ -29,8 +29,10 @@ test.each<[string, MergeSortState, MergeSortAction, MergeSortState]>([
     { editingIndex: -1, numberList: [42, 21, 13] },
     { type: "START_EDITION", payload: { index: 3 } },
     { editingIndex: -1, numberList: [42, 21, 13] },
+    true,
   ],
-])("%s", (_, state, action, expectedState) => {
+])("%s", (_, state, action, expectedState, sameRef = false) => {
   const nextState = mergeSortReducer(state, action);
   expect(nextState).toEqual(expectedState);
+  expect(state === nextState).toBe(sameRef);
 });

@@ -117,7 +117,7 @@ test.each([
   expect(dfsArray).toEqual(expected);
 });
 
-test("tree creation with an object as init value, must shallo copy this object", () => {
+test("tree creation with an object as init value, must shallow copy this object", () => {
   const tree = createTree(3, { test: 42 });
   if (tree != null && tree.data != null) {
     tree.data.test = 21;
@@ -147,7 +147,7 @@ test("get depth of a one node tree", () => {
   expect(node.getDepth()).toBe(0);
 });
 
-test("get depth of tree", () => {
+test("get depth of a tree", () => {
   const tree = getTestTree();
   expect(tree.getDepth()).toBe(3);
 });

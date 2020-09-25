@@ -1,4 +1,5 @@
 import { MergeSortAction } from "./useMergeSortState";
+import { TreePath } from "../../model/Node";
 
 function merge(
   array: number[],
@@ -26,21 +27,23 @@ function merge(
 function* mergeSortRecursive(
   array: number[],
   start: number,
-  end: number
+  end: number,
+  path: TreePath
 ): Generator<MergeSortAction> {
   yield {
     type: "CALL_ON_SUB_ARRAY",
-    payload: { subArray: array.slice(start, end) },
+    payload: { subArray: array.slice(start, end), path },
   };
   if (end - start > 1) {
     const middle = Math.ceil((end - start) / 2) + start;
-    yield* mergeSortRecursive(array, start, middle);
-    yield* mergeSortRecursive(array, middle, end);
+    yield* mergeSortRecursive(array, start, middle, [...path, "L"]);
+    yield* mergeSortRecursive(array, middle, end, [...path, "R"]);
     merge(array, start, middle, end);
     yield {
       type: "MERGE_ARRAY",
       payload: {
         merged: array.slice(start, end),
+        path,
       },
     };
   }
@@ -49,7 +52,7 @@ function* mergeSortRecursive(
 function* mergeSortGenerator(
   arrayToSort: number[]
 ): Generator<MergeSortAction> {
-  yield* mergeSortRecursive(arrayToSort, 0, arrayToSort.length);
+  yield* mergeSortRecursive(arrayToSort, 0, arrayToSort.length, []);
 }
 
 export default mergeSortGenerator;

@@ -1,5 +1,6 @@
 import { useReducer } from "react";
 import validateListItem from "../../utils/validateListItem";
+import { TreePath } from "../../model/Node";
 
 export type MergeSortState = {
   numberList: (number | "" | "-")[];
@@ -40,6 +41,7 @@ type CallOnSubArray = {
   type: "CALL_ON_SUB_ARRAY";
   payload: {
     subArray: number[];
+    path: TreePath;
   };
 };
 
@@ -47,6 +49,7 @@ type MergeArray = {
   type: "MERGE_ARRAY";
   payload: {
     merged: number[];
+    path: TreePath;
   };
 };
 

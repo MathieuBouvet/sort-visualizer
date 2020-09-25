@@ -1,4 +1,4 @@
-type TreePath = ("L" | "R")[];
+export type TreePath = ("L" | "R")[];
 
 export class Node<T> {
   data: T | null;

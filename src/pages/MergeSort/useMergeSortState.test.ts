@@ -12,6 +12,24 @@ test.each<[string, MergeSortState, MergeSortAction, MergeSortState]>([
     { type: "INSERT_VALUE", payload: { value: 42 } },
     { editingIndex: -1, numberList: [42] },
   ],
+  [
+    "start list edition",
+    { editingIndex: -1, numberList: [42, 21, 13] },
+    { type: "START_EDITION", payload: { index: 0 } },
+    { editingIndex: 0, numberList: [42, 21, 13] },
+  ],
+  [
+    "start list edition",
+    { editingIndex: -1, numberList: [42, 21, 13] },
+    { type: "START_EDITION", payload: { index: 2 } },
+    { editingIndex: 2, numberList: [42, 21, 13] },
+  ],
+  [
+    "start list edition on out of bound index",
+    { editingIndex: -1, numberList: [42, 21, 13] },
+    { type: "START_EDITION", payload: { index: 3 } },
+    { editingIndex: -1, numberList: [42, 21, 13] },
+  ],
 ])("%s", (_, state, action, expectedState) => {
   const nextState = mergeSortReducer(state, action);
   expect(nextState).toEqual(expectedState);

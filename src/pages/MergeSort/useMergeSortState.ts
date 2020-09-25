@@ -17,7 +17,14 @@ type InsertValue = {
   };
 };
 
-export type MergeSortAction = InsertValue;
+type StartEdition = {
+  type: "START_EDITION";
+  payload: {
+    index: number;
+  };
+};
+
+export type MergeSortAction = InsertValue | StartEdition;
 
 export function mergeSortReducer(
   state: MergeSortState,
@@ -28,6 +35,16 @@ export function mergeSortReducer(
       return {
         ...state,
         numberList: [...state.numberList, action.payload.value],
+      };
+    }
+    case "START_EDITION": {
+      const index = action.payload.index;
+      if (index < -1 || index > state.numberList.length - 1) {
+        return state;
+      }
+      return {
+        ...state,
+        editingIndex: action.payload.index,
       };
     }
     default: {

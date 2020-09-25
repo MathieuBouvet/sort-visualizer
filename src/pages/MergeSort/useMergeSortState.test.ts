@@ -31,6 +31,25 @@ test.each<[string, MergeSortState, MergeSortAction, MergeSortState, boolean?]>([
     { editingIndex: -1, numberList: [42, 21, 13] },
     true,
   ],
+  [
+    "edit list item",
+    { editingIndex: 1, numberList: [42, 21, 13] },
+    { type: "EDIT_LIST_ITEM", payload: { value: "4242" } },
+    { editingIndex: 1, numberList: [42, 4242, 13] },
+  ],
+  [
+    "edit list item with a non parsable value",
+    { editingIndex: 1, numberList: [42, 21, 13] },
+    { type: "EDIT_LIST_ITEM", payload: { value: "troll" } },
+    { editingIndex: 1, numberList: [42, 21, 13] },
+    true,
+  ],
+  [
+    "edit list item with an empty string",
+    { editingIndex: 1, numberList: [42, 21, 13] },
+    { type: "EDIT_LIST_ITEM", payload: { value: "" } },
+    { editingIndex: 1, numberList: [42, 0, 13] },
+  ],
 ])("%s", (_, state, action, expectedState, sameRef = false) => {
   const nextState = mergeSortReducer(state, action);
   expect(nextState).toEqual(expectedState);

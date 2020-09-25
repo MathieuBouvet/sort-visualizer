@@ -24,7 +24,14 @@ type StartEdition = {
   };
 };
 
-export type MergeSortAction = InsertValue | StartEdition;
+type EditListItem = {
+  type: "EDIT_LIST_ITEM";
+  payload: {
+    value: string;
+  };
+};
+
+export type MergeSortAction = InsertValue | StartEdition | EditListItem;
 
 export function mergeSortReducer(
   state: MergeSortState,
@@ -45,6 +52,22 @@ export function mergeSortReducer(
       return {
         ...state,
         editingIndex: action.payload.index,
+      };
+    }
+    case "EDIT_LIST_ITEM": {
+      const { editingIndex, numberList } = state;
+      const receivedValue = action.payload.value;
+      const newValue = receivedValue.length > 0 ? parseInt(receivedValue) : 0;
+      if (isNaN(newValue)) {
+        return state;
+      }
+      return {
+        ...state,
+        numberList: [
+          ...numberList.slice(0, editingIndex),
+          newValue,
+          ...numberList.slice(editingIndex + 1),
+        ],
       };
     }
     default: {

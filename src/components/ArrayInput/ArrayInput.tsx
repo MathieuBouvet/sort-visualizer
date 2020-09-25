@@ -6,7 +6,7 @@ import Button from "../Button";
 type ArrayInputProps<T> = {
   currentList: T[];
   editingIndex?: number;
-  onInsert?: () => void;
+  onInsert?: (value: number) => void;
   onEditStart?: (editingIndex: number) => void;
   onEditEnd?: () => void;
   onEdit?: (newValue: string) => void;
@@ -64,7 +64,14 @@ const ArrayInput = <T extends { toString: () => string }>({
           onChange={(e) => dispatch({ type: "EDIT", value: e.target.value })}
         />
       </div>
-      <Button className="add-number-button" onClick={onInsert}>
+      <Button
+        className="add-number-button"
+        onClick={() => {
+          if (state.inputValue) {
+            onInsert(state.inputValue);
+          }
+        }}
+      >
         Add
       </Button>
     </div>

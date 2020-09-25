@@ -10,12 +10,16 @@ test("render the given list", () => {
 });
 
 test("updating the item value ", () => {
+  const testInsertHandler = jest.fn();
   const { getByRole, getByDisplayValue } = render(
-    <ArrayInput currentList={[]} />
+    <ArrayInput currentList={[]} onInsert={testInsertHandler} />
   );
   const itemInput = getByRole("textbox");
   fireEvent.change(itemInput, { target: { value: "42" } });
   expect(getByDisplayValue("42")).toBeInTheDocument();
+  const insertButton = getByRole("button", { name: "Add" });
+  insertButton.click();
+  expect(testInsertHandler).toHaveBeenCalledWith(42);
 });
 
 test("edit mode", () => {

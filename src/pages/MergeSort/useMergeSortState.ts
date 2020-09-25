@@ -36,11 +36,27 @@ type EndEdition = {
   type: "END_EDITION";
 };
 
+type CallOnSubArray = {
+  type: "CALL_ON_SUB_ARRAY";
+  payload: {
+    subArray: number[];
+  };
+};
+
+type MergeArray = {
+  type: "MERGE_ARRAY";
+  payload: {
+    merged: number[];
+  };
+};
+
 export type MergeSortAction =
   | InsertValue
   | StartEdition
   | EditListItem
-  | EndEdition;
+  | EndEdition
+  | CallOnSubArray
+  | MergeArray;
 
 export function mergeSortReducer(
   state: MergeSortState,

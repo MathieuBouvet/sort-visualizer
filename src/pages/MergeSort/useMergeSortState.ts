@@ -32,7 +32,15 @@ type EditListItem = {
   };
 };
 
-export type MergeSortAction = InsertValue | StartEdition | EditListItem;
+type EndEdition = {
+  type: "END_EDITION";
+};
+
+export type MergeSortAction =
+  | InsertValue
+  | StartEdition
+  | EditListItem
+  | EndEdition;
 
 export function mergeSortReducer(
   state: MergeSortState,
@@ -70,6 +78,27 @@ export function mergeSortReducer(
           newValue,
           ...numberList.slice(editingIndex + 1),
         ],
+      };
+    }
+    case "END_EDITION": {
+      const { numberList, editingIndex } = state;
+      const editedValue = numberList[editingIndex];
+      if (editingIndex < 0 || editedValue === "-") {
+        return state;
+      }
+      if (editedValue === "") {
+        return {
+          ...state,
+          editingIndex: -1,
+          numberList: [
+            ...numberList.slice(0, editingIndex),
+            ...numberList.slice(editingIndex + 1),
+          ],
+        };
+      }
+      return {
+        ...state,
+        editingIndex: -1,
       };
     }
     default: {

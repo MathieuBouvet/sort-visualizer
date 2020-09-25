@@ -50,6 +50,25 @@ test.each<[string, MergeSortState, MergeSortAction, MergeSortState, boolean?]>([
     { type: "EDIT_LIST_ITEM", payload: { value: "" } },
     { editingIndex: 1, numberList: [42, "", 13] },
   ],
+  [
+    "end edition",
+    { editingIndex: 1, numberList: [42, 21, 13] },
+    { type: "END_EDITION" },
+    { editingIndex: -1, numberList: [42, 21, 13] },
+  ],
+  [
+    "end edition with an empty value",
+    { editingIndex: 1, numberList: [42, "", 13] },
+    { type: "END_EDITION" },
+    { editingIndex: -1, numberList: [42, 13] },
+  ],
+  [
+    "end edition with a dash",
+    { editingIndex: 1, numberList: [42, "-", 13] },
+    { type: "END_EDITION" },
+    { editingIndex: 1, numberList: [42, "-", 13] },
+    true,
+  ],
 ])("%s", (_, state, action, expectedState, sameRef = false) => {
   const nextState = mergeSortReducer(state, action);
   expect(nextState).toEqual(expectedState);

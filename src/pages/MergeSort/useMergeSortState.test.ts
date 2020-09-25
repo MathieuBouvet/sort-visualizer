@@ -48,7 +48,7 @@ test.each<[string, MergeSortState, MergeSortAction, MergeSortState, boolean?]>([
     "edit list item with an empty string",
     { editingIndex: 1, numberList: [42, 21, 13] },
     { type: "EDIT_LIST_ITEM", payload: { value: "" } },
-    { editingIndex: 1, numberList: [42, 0, 13] },
+    { editingIndex: 1, numberList: [42, "", 13] },
   ],
 ])("%s", (_, state, action, expectedState, sameRef = false) => {
   const nextState = mergeSortReducer(state, action);

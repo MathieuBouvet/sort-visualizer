@@ -1,7 +1,7 @@
 import { useReducer } from "react";
 
 export type MergeSortState = {
-  numberList: number[];
+  numberList: (number | "" | "-")[];
   editingIndex: number;
 };
 
@@ -33,6 +33,27 @@ type EditListItem = {
 
 export type MergeSortAction = InsertValue | StartEdition | EditListItem;
 
+function validateEditValue(
+  value: string
+): { isValid: boolean; value: number | "" | "-" } {
+  const parsed = parseInt(value);
+  if (value === "" || value === "-") {
+    return {
+      isValid: true,
+      value,
+    };
+  } else if (!isNaN(parsed)) {
+    return {
+      isValid: true,
+      value: parsed,
+    };
+  }
+  return {
+    isValid: false,
+    value: "",
+  };
+}
+
 export function mergeSortReducer(
   state: MergeSortState,
   action: MergeSortAction
@@ -56,9 +77,10 @@ export function mergeSortReducer(
     }
     case "EDIT_LIST_ITEM": {
       const { editingIndex, numberList } = state;
-      const receivedValue = action.payload.value;
-      const newValue = receivedValue.length > 0 ? parseInt(receivedValue) : 0;
-      if (isNaN(newValue)) {
+      const { isValid, value: newValue } = validateEditValue(
+        action.payload.value
+      );
+      if (!isValid) {
         return state;
       }
       return {
